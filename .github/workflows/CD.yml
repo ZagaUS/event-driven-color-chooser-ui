@@ -25,7 +25,10 @@ jobs:
         sudo npm install -g cordova ionic
 
     - name: Ionic build
-      run: ionic build
+      run: |
+        ls -al .
+        ionic build
+        ls -al ./www
     
     - name: Terraform deployment
       run: |
