@@ -11,12 +11,12 @@
   <div class="blue-square-container">
 
   <ion-list>
-    <ion-button  (click)="changeColors('r')" color="danger">Red</ion-button>
-    <ion-button  (click)="changeColors('b')" >Blue</ion-button>
-    <ion-button  (click)="changeColors('g')" color="success">Green</ion-button>
+    <ion-button (click)="changeColors('r')" color="danger">Red ({{r}})</ion-button>
+    <ion-button (click)="changeColors('b')" >Blue ({{b}})</ion-button>
+    <ion-button (click)="changeColors('g')" color="success">Green ({{g}})</ion-button>
   </ion-list>
 
   <div class="my-square" [style.background-color]="clr" >
-    <ion-lable class="labelcol">Leading color</ion-lable>
+    <ion-lable class="labelcol">Consensus</ion-lable>
   </div>
 </div>
