@@ -1,42 +1,26 @@
 <!--ion-header [translucent]="true"-->
 <ion-header>
   <ion-toolbar>
+    <div text-center>
     <ion-title>
      Vote your color  
     </ion-title>
+  </div>
   </ion-toolbar>
 </ion-header>
 
-<!--ion-content [fullscreen]="true"-->
 <ion-content padding>
-
   <div class="blue-square-container">
 
-
   <ion-list>
-  <ion-button  (click)="changeColors('r')" color="danger">Red</ion-button>
-  <ion-button  (click)="changeColors('b')" >Blue</ion-button>
-  <ion-button  (click)="changeColors('g')" color="success">Green</ion-button>
-
+    <ion-button (click)="changeColors('r')" color="danger">Red ({{r}})</ion-button>
+    <ion-button (click)="changeColors('b')" >Blue ({{b}})</ion-button>
+    <ion-button (click)="changeColors('g')" color="success">Green ({{g}})</ion-button>
   </ion-list>
 
-  <div class="my-square" [style.background-color]="clr" >
-    <ion-lable class="labelcol">Leading color</ion-lable>
+
+  <div>
+    <ion-lable class="labelcol">Consensus</ion-lable>
+    <div class="my-square" [style.background-color]="clr" ></div>
   </div>
-
-
 </div>
-
-  
-<div class="card">
-  <div class="card-header">
-    <label> Enter text
-      <input type="text" #message>ase
-    </label>
-    <button class="btn btn-primary" (click)="sendMessage(message.value)">send</button>
-  </div>
-  <ul class="list-group list-group-flush" *ngFor="let message of messages">
-    <li *ngIf="message" class="list-group-item">{{message}}</li>
-  </ul>
-</div>
-</ion-content>

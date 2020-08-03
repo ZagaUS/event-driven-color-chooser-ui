@@ -27,7 +27,7 @@
 }
 .labelcol{
   color: #fff;
-  //font-size: 2em;
+  background-color: #000;
   font-size: 40px !important;
 }
 
@@ -36,13 +36,11 @@
 }
 
 .blue-square {
-  //background-color: #0074D9;
   width: 400px;
   height: 500px;
   display: inline-block;
 }
 .my-square {
-  //background-color: #0074D9;
   width: 500px;
   height: 500px;
   position:absolute;
@@ -64,13 +62,6 @@
  }
 }
 
-
-/*$blue:       #488aff;
-$green:      #4DB6AC;
-$red:        #f53d3d;
-$gray:       #f4f4f4;
-$black:      #000000;
-*/
 $colors: (
   primary:    #488aff,
   secondary:  #32db64,
@@ -79,15 +70,6 @@ $colors: (
   dark:       #222,
   my-special-color:   #ffcc55,
 );
-/*$colors: (
-  primary:   $blue,
-  secondary: $green,
-  secondary: $red,
-  gray:    $grqy,
-  black:    $black,
-
-  my-special-color:   #ffcc55,
-);*/
 
 .card-background-page {
 
@@ -212,4 +194,13 @@ footer {
 
 .card{
   width: 25rem;
+}
+
+.md.title-default {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  text-align: center;
 }
