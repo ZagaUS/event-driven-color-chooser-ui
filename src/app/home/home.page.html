@@ -1,9 +1,11 @@
 <!--ion-header [translucent]="true"-->
 <ion-header>
   <ion-toolbar>
+    <div text-center>
     <ion-title>
      Vote your color  
     </ion-title>
+  </div>
   </ion-toolbar>
 </ion-header>
 
@@ -16,7 +18,9 @@
     <ion-button (click)="changeColors('g')" color="success">Green ({{g}})</ion-button>
   </ion-list>
 
-  <div class="my-square" [style.background-color]="clr" >
+
+  <div>
     <ion-lable class="labelcol">Consensus</ion-lable>
+    <div class="my-square" [style.background-color]="clr" ></div>
   </div>
 </div>
