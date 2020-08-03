@@ -1,0 +1,31 @@
+name: CD
+
+on:
+  push:
+    branches: [ develop, master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  cd-build:
+    runs-on: ubuntu-latest
+    name: Continuous deployment
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2.0.0
+
+    - name: Dump gitHub context
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: echo "$GITHUB_CONTEXT"
+
+    - name: Install prerequisites
+      run: npm install
+
+    - name: Ionic build
+      run: ionic build
+    
+    - name: Terraform deployment
+      run: |
+        cd ./deployment
+        terraform apply -auto-approve
