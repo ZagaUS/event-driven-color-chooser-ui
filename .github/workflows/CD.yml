@@ -20,7 +20,9 @@ jobs:
       run: echo "$GITHUB_CONTEXT"
 
     - name: Install prerequisites
-      run: npm install
+      run: |
+        npm install
+        npm install -g cordova ionic
 
     - name: Ionic build
       run: ionic build
