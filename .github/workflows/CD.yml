@@ -30,4 +30,5 @@ jobs:
     - name: Terraform deployment
       run: |
         cd ./deployment
+        terraform init
         terraform apply -auto-approve
