@@ -24,12 +24,19 @@ export class ColorsrvService {
  public vote: Subject<MessageEvent>;
   url = 'wss://ws.colorchooser.iamcly.de/';
   messages: string[] = [];
+  message = '#D3D3D3';
+
 
   constructor( private wsService: WebsocketService) {
 
     wsService.connect()
       .subscribe(evt => {
-        this.messages.push(evt.data);
+        const dt = JSON.parse(evt.data);
+        console.log('event' , dt.hex);
+
+        this.message = dt.hex;
+        console.log('update event' , this.message);
+        this.messages.push(dt.hex);
       });
 
     /*this.voteResults = (wsService.connect().map(

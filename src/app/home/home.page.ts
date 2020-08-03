@@ -1,13 +1,13 @@
-import { Component , OnInit } from '@angular/core';
+import { Component , ViewChild , ElementRef, Renderer2 , OnInit , AfterViewInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import {webSocket, WebSocketSubject} from 'rxjs/webSocket';
 import { WebsocketService } from '../websocket.service';
-import { ColorsrvService } from '../colorsrv.service';
+// import { ColorsrvService } from '../colorsrv.service';
 
 import * as Rx from 'rxjs/Rx';
-import { Observable, Subject } from "rxjs/Rx";
-import {interval} from "rxjs/internal/observable/interval";
-import {startWith, switchMap} from "rxjs/operators";
+import { Observable, Subject } from 'rxjs/Rx';
+import {interval} from 'rxjs/internal/observable/interval';
+import {startWith, switchMap} from 'rxjs/operators';
 
 export interface Vote {
   action: string;
@@ -28,53 +28,41 @@ export interface VoteResult {
 })
 
 
-export class HomePage implements OnInit {
-  changeColor = 'success';
-  colors: string[] = ['#000000', '#db0f0f', '#0fbf0f', '#35a3e8', '#FFFFFF'];
-  color: string[] = ['yellow', 'blue', 'red', '', '#FFFFFF'];
+export class HomePage implements OnInit , AfterViewInit {
   clr = '#D3D3D3';
-  currentColor: string = this.colors[1];
-  message = '';
-  //messages = [];
-  currentUser = '';
-  subject: Rx.Subject<VoteResult>;
-  subjectVote: Rx.Subject<Vote>;
   url = 'wss://ws.colorchooser.iamcly.de';
   messages: string[] = [];
+  myDiv;
+  r = '0';
+  b = '0';
+  g = '0';
 
-  constructor( private colorsrvService: ColorsrvService) {
-    this.changeColor = 'my-special-color';
+ @ViewChild('my-square') divView: ElementRef;
+
+  constructor(  public wsService: WebsocketService ,
+                public element: ElementRef ) {
+  }
+
+   ngAfterViewInit(){
+    this.myDiv = this.element.nativeElement.querySelector('.my-square');
+    console.log('view', this.divView);
+    this.myDiv.style.backgroundColor = this.clr ;
     }
 
   ngOnInit(){
 
-    this.messages = this.colorsrvService.messages;
-    console.log('Response from websocket: ' + this.messages);
-    /*this.colorsrvService.voteResults.subscribe(msg => {
-      console.log('Response from websocket: ' + msg);
-    });*/
+   this.wsService.connect()
+   .subscribe(evt => {
+     const dt = JSON.parse(evt.data);
+     console.log('event' , evt);
+     this.clr = dt.hex;
+     this.r = dt.r;
+     this.b = dt.b;
+     this.g = dt.g;
+     this.messages.push(dt.hex);
+   });
 
-
-  }
-  changeColors1(cl){
-    console.log(cl);
-    if ( cl === 'r'){
-      console.log('red');
-      this.clr = '#f53d3d' ;
-    }
-    if ( cl === 'g'){
-      console.log('green');
-
-      this.clr = '#32db64' ;
-     }
-    if ( cl === 'b' ){
-      console.log('red');
-      this.clr = '#488aff' ;
-     }
-
-  }
-  switchColor(index: number) {
-    this.currentColor = this.colors[index];
+   console.log('Response from websocket: ' + this.messages);
   }
   changeColors(cl){
 
@@ -82,9 +70,8 @@ export class HomePage implements OnInit {
       action: 'vote',
       color: cl
     };
-    //this.colorsrvService.vote.next(val);
-
-    console.log('new message from client to websocket: ', cl);
+    this.wsService.sendMessage(JSON.stringify(val));
+    console.log('new message from client to websocket: ', JSON.stringify(val));
 
   }
 }
