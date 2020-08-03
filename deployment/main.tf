@@ -1,3 +1,11 @@
+terraform {
+  backend "s3" {
+    bucket = "iamclyde-terraform"
+    key    = "colorchooser/terraform.tfstate"
+    region = "us-east-1"
+  }
+}
+
 locals {
   zone_name = "iamcly.de"
   app_name  = "colorchooser"
