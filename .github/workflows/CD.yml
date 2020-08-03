@@ -22,7 +22,7 @@ jobs:
     - name: Install prerequisites
       run: |
         npm install
-        npm install -g cordova ionic
+        sudo npm install -g cordova ionic
 
     - name: Ionic build
       run: ionic build
