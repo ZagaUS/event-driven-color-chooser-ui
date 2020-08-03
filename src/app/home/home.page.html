@@ -7,36 +7,16 @@
   </ion-toolbar>
 </ion-header>
 
-<!--ion-content [fullscreen]="true"-->
 <ion-content padding>
-
   <div class="blue-square-container">
 
-
   <ion-list>
-  <ion-button  (click)="changeColors('r')" color="danger">Red</ion-button>
-  <ion-button  (click)="changeColors('b')" >Blue</ion-button>
-  <ion-button  (click)="changeColors('g')" color="success">Green</ion-button>
-
+    <ion-button  (click)="changeColors('r')" color="danger">Red</ion-button>
+    <ion-button  (click)="changeColors('b')" >Blue</ion-button>
+    <ion-button  (click)="changeColors('g')" color="success">Green</ion-button>
   </ion-list>
 
   <div class="my-square" [style.background-color]="clr" >
     <ion-lable class="labelcol">Leading color</ion-lable>
   </div>
-
-
 </div>
-
-  
-<div class="card">
-  <div class="card-header">
-    <label> Enter text
-      <input type="text" #message>ase
-    </label>
-    <button class="btn btn-primary" (click)="sendMessage(message.value)">send</button>
-  </div>
-  <ul class="list-group list-group-flush" *ngFor="let message of messages">
-    <li *ngIf="message" class="list-group-item">{{message}}</li>
-  </ul>
-</div>
-</ion-content>
