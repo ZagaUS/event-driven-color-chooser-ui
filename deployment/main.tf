@@ -26,7 +26,7 @@ module "website_with_cname" {
 }
 
 resource "null_resource" "remove_and_upload_to_s3" {
-  triggers {
+  triggers = {
     build_number = "${timestamp()}"
   }
   provisioner "local-exec" {
