@@ -27,6 +27,9 @@ module "website_with_cname" {
 
 resource "null_resource" "remove_and_upload_to_s3" {
   provisioner "local-exec" {
-    command = "aws s3 sync ${path.module}/../www s3://${module.website_with_cname.s3_bucket_name} --exact-timestamps"
+    command = <<EOT
+      aws s3 cp ${path.module}/../www s3://${module.website_with_cname.s3_bucket_name}
+      aws s3 sync ${path.module}/../www s3://${module.website_with_cname.s3_bucket_name} --delete
+    EOT
   }
 }
