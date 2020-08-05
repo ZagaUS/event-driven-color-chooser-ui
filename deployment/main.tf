@@ -16,13 +16,14 @@ data "aws_route53_zone" "primary" {
 }
 
 module "website_with_cname" {
-  source         = "git::https://github.com/cloudposse/terraform-aws-s3-website.git?ref=master"
+  source         = "git::https://github.com/cloudposse/terraform-aws-s3-website.git?ref=0.10.0"
   namespace      = "demo"
   stage          = "develop"
   name           = local.app_name
   hostname       = "${local.app_name}.${local.zone_name}"
   parent_zone_id = data.aws_route53_zone.primary.zone_id
   index_document = "index.html"
+  error_document = "index.html"
 }
 
 resource "null_resource" "remove_and_upload_to_s3" {
