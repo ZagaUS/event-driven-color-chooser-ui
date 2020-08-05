@@ -18,9 +18,9 @@ export class HomePage implements OnInit {
       if (evt.data) {
         let payload = JSON.parse(evt.data);
         this.clr = payload.hex || this.clr;
-        this.r   = payload.r || this.r
-        this.g   = payload.g || this.g
-        this.b   = payload.b || this.b
+        ['r', 'g', 'b'].forEach( value => {
+          this[value] = (value in payload) ? payload[value] : this[value]
+        });
       }
     });
   }
